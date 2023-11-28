@@ -14,5 +14,9 @@ jobs:
       image: node
     
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+        
       - name: Installing Dependicies
         run: npm install
