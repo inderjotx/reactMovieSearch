@@ -17,6 +17,34 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-        
+
       - name: Installing Dependicies
         run: npm install
+
+
+  ship-image:
+    runs-on: [self-hosted]
+    
+    container:
+      image: docker:dind
+      options: --privileged
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+
+      - name: Bulding docker login
+        run: echo "${{ PASSWORD }}" | docker login -u ${{ USERNAME }} --password-stdin
+
+      
+      - name: Build image
+        run: docker build -t ${{ USERNAME }}/github-project .
+
+      
+      - name: Push image
+        run: docker push  ${{ USERNAME }}/github-project
+
+
+      
+    
