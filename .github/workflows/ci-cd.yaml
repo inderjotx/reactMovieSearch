@@ -24,7 +24,7 @@ jobs:
 
   ship-image:
     runs-on: [self-hosted]
-    
+
     container:
       image: docker:dind
       options: --privileged
@@ -35,15 +35,15 @@ jobs:
 
 
       - name: Bulding docker login
-        run: echo "${{ PASSWORD }}" | docker login -u ${{ USERNAME }} --password-stdin
+        run: echo ${{ secrets.PASSWORD }} | docker login -u ${{ secrets.USERNAME }} --password-stdin
 
       
       - name: Build image
-        run: docker build -t ${{ USERNAME }}/github-project .
+        run: docker build -t ${{ secrets.USERNAME }}/github-project .
 
       
       - name: Push image
-        run: docker push  ${{ USERNAME }}/github-project
+        run: docker push  ${{ secrets.USERNAME }}/github-project
 
 
       
