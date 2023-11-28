@@ -1,0 +1,18 @@
+name: This is my first github ci-cd pipeline 
+
+on: 
+  push:
+    branches:
+      - master
+
+
+
+jobs:
+  build:
+    runs-on: [self-hosted]
+    container:
+      image: node
+    
+    steps:
+      - name: Installing Dependicies
+        run: npm install
